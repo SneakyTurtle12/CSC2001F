@@ -2,9 +2,9 @@
 //LBNSEB002
 
 public record PlaceNameEntry(
+        String id,
         String placeName,
         String municipality,
-        String id,
         String province,
         Integer population
 ) {}
