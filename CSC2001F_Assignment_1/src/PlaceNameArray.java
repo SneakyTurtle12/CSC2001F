@@ -29,6 +29,7 @@ public class PlaceNameArray {
         }
     }
     public PlaceNameEntry Search(PlaceNameEntry[] arrPlaces, String name){
+        comparisons = 0;
         for (int i = 0; i < iCount; i++){
             comparisons+=1;
             if (name.compareTo(arrPlaces[i].placeName()) == 0){
