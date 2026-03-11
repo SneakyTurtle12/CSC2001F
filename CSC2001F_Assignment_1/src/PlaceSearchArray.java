@@ -46,6 +46,7 @@ public class PlaceSearchArray {
                     System.out.println("There were " + PNA.getComparisons() + " comparisons in your most recent search.");
                     break;
                 case 'q':
+                    System.out.println("Thank you");
                     bQuit = true;
                     break;
             }

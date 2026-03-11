@@ -24,7 +24,7 @@ public class PlaceNameBST {
         root = null;
     }
     // Public method to insert
-    public void insert(PlaceNameEntry value) {
+    private void insert(PlaceNameEntry value) {
         root = recursiveInsert(root, value);
     }
     private boolean dupFlag;
@@ -52,7 +52,7 @@ public class PlaceNameBST {
         return searchTreeRecursive(root, placeName);
     }
     private PlaceNameEntry searchTreeRecursive(Node root, String placeName){
-        if (root.value == null){
+        if (root == null){
             return new PlaceNameEntry("","","","",0);//item not found, returns empty placeNameEntry
         }
         if (root.value.placeName().compareTo(placeName) == 0){ //item found, returns the PlaceNameENtry value with given placeName
@@ -108,6 +108,7 @@ public class PlaceNameBST {
     public int getTreeHeight(){
         return getRecursiveTreeHeight(root);
     }
+
     private int getRecursiveTreeHeight(Node root){
         if (root == null){
             return -1;
@@ -123,6 +124,7 @@ public class PlaceNameBST {
 
         try{
             Scanner scanner = new Scanner(cFile);
+            scanner.nextLine();
             while (scanner.hasNextLine() && iCount <= size){ //iCount given by user, reads <size> records from csv
                 String line = scanner.nextLine();
                 String[] values = line.split(",");
