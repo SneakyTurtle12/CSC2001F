@@ -9,6 +9,7 @@ public class PlaceNameArray {
     private int comparisons;
     private int iCount = 0;
     public void loadArray(int size, String fileName){
+        iCount = 0;
         Set<String> seen = new HashSet<>();
         File cFile = new File(fileName);
         arrPlaces = new PlaceNameEntry[size];
@@ -41,4 +42,5 @@ public class PlaceNameArray {
         return new PlaceNameEntry("","","","",0);
     }
     public int getComparisons(){return comparisons;}
+    public PlaceNameEntry[] getArrPlaces(){return arrPlaces;}
 }

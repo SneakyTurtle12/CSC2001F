@@ -58,6 +58,7 @@ public class PlaceSearchBST {
                 case '5':
                     scanner.nextLine();
                     System.out.println("The tree has a height (longest path from first root to last leaf) of " + PNB.getTreeHeight() + ".");
+                    break;
                 case 'q':
                     System.out.println("Thank you");
                     bQuit = true;

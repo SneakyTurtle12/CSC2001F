@@ -24,7 +24,7 @@ public class PlaceNameBST {
         root = null;
     }
     // Public method to insert
-    private void insert(PlaceNameEntry value) {
+    public void insert(PlaceNameEntry value) {
         root = recursiveInsert(root, value);
     }
     private boolean dupFlag;
@@ -49,21 +49,21 @@ public class PlaceNameBST {
         return root;
     }
     public PlaceNameEntry searchTree(String placeName){
+        comparisons = 0;
         return searchTreeRecursive(root, placeName);
     }
     private PlaceNameEntry searchTreeRecursive(Node root, String placeName){
         if (root == null){
             return new PlaceNameEntry("","","","",0);//item not found, returns empty placeNameEntry
         }
-        if (root.value.placeName().compareTo(placeName) == 0){ //item found, returns the PlaceNameENtry value with given placeName
-            comparisons+=1;
+        int comparison = root.value.placeName().compareTo(placeName);
+        comparisons++;
+        if (comparison == 0){ //item found, returns the PlaceNameENtry value with given placeName
             return root.value;
         }
-        if (root.value.placeName().compareTo(placeName) < 0){ //if value smaller than current root, traverse left node until its found
-            comparisons+=1;
+        if (comparison > 0){ //if value smaller than current root, traverse left node until its found
             return searchTreeRecursive(root.left,placeName);
         } else {
-            comparisons+=1;
             return searchTreeRecursive(root.right, placeName); //if value greater than current root, traverse right node until its found
         }
     }

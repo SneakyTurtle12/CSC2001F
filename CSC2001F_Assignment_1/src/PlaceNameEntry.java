@@ -7,4 +7,13 @@ public record PlaceNameEntry(
         String municipality,
         String province,
         Integer population
-) {}
+) implements Comparable<PlaceNameEntry> {
+    @Override
+    public int compareTo(PlaceNameEntry other){
+        return this.placeName().compareTo(other.placeName());
+    }
+    public String toString(){
+        return this.id() + "," + this.placeName() + "," + this.municipality()+ "," + this.province() + "," + this.population();
+    }
+}
+
