@@ -83,14 +83,15 @@ public class PlaceExperiment {
             throw new RuntimeException(e);
         }
         arrResults.sort(null);
-        try{
-            Files.write(filenew, new byte[0]);
-            for (int iCount = 0; iCount<arrResults.size(); iCount++){
-                Files.writeString(filenew, arrResults.get(iCount).toString() + "\n", StandardOpenOption.APPEND);
+        try (BufferedWriter writer = Files.newBufferedWriter(filenew,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            for (PlaceNameEntry entry : arrResults) {
+                writer.write(entry.toString());
+                writer.newLine();
             }
-
+        } catch(IOException e) {
+            System.err.println("Error writing Sorted.csv: " + e.getMessage());
         }
-        catch(IOException e){System.err.println("An error occurred while writing to the file: " + e.getMessage());}
     }
     private static float[] ArrayResults(Integer[] N, String[] arrSearches, String fileName){
         float[] arrResults = new float[10];
