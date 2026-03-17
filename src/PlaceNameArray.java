@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class PlaceNameArray {
-    PlaceNameEntry[] arrPlaces;
+    private PlaceNameEntry[] arrPlaces;
     private int comparisons;
     private int iCount = 0;
     public void loadArray(int size, String fileName){
@@ -42,5 +42,5 @@ public class PlaceNameArray {
         return new PlaceNameEntry("","","","",0);
     }
     public int getComparisons(){return comparisons;}
-    public PlaceNameEntry[] getArrPlaces(){return arrPlaces;}
+    public PlaceNameEntry[] getArrPlaces(){return arrPlaces;    }
 }

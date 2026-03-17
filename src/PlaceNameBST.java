@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class PlaceNameBST {
     private int comparisons;
     private int iCount;
-    public int getiCount(){
-        return iCount;
-    }
     public int getComparisons(){
         return comparisons;
     }
@@ -23,8 +20,7 @@ public class PlaceNameBST {
     public PlaceNameBST() { //constructor for BST
         root = null;
     }
-    // Public method to insert
-    public void insert(PlaceNameEntry value) {
+    private void insert(PlaceNameEntry value) {
         root = recursiveInsert(root, value);
     }
     private boolean dupFlag;

@@ -19,6 +19,7 @@ public class PlaceSearchBST {
                     System.out.println("What is the name of the file?");
                     String fileName = scanner.nextLine();
                     System.out.println("How many lines of the array would you like to load?");
+                    try{
                     int N = scanner.nextInt();
                     System.out.println("You are loading " + N + " lines, from the file \"" + fileName + "\". \nConfirm [Y/N]:");
                     if (scanner.next().toLowerCase().charAt(0) == 'y') {
@@ -26,10 +27,12 @@ public class PlaceSearchBST {
                         System.out.println("Array loaded successfully.");
                     }
                     break;
+                    } catch(RuntimeException e) {System.out.println("Please insert a number"); break;}
                 case '2':
                     scanner.nextLine();
                     System.out.println("What is the name of the place you are looking for?");
                     String placeName = scanner.nextLine();
+                    if (placeName.isEmpty()){break;}
                     System.out.println("You are looking for place \"" + placeName + "\". \nConfirm [Y/N]:");
                     if (scanner.next().toLowerCase().charAt(0) == 'y') { //allows user to say Y, Yes, y or yes
                         PlaceNameEntry search = PNB.searchTree(placeName);
@@ -45,6 +48,7 @@ public class PlaceSearchBST {
                     scanner.nextLine();
                     System.out.println("What is the name of the place corresponding to the desired deletion?");
                     String deletion = scanner.nextLine();
+                    if (deletion.isEmpty()){break;}
                     System.out.println("You are about to delete the record with place name " + deletion + ". Confirm [Y/N]:");
                     if (scanner.next().toLowerCase().charAt(0) == 'y') { //allows user to say Y, Yes, y or yes
                         PNB.deleteBST(deletion);
