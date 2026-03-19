@@ -17,6 +17,7 @@ public class PlaceSearchArray {
             System.out.println("3. Return number of comparisons for most recent search");
             switch (scanner.next().toLowerCase().charAt(0)){
                 case '1':
+                    try{
                     scanner.nextLine(); //gets rid of \n from reading first char, allowing user to say "1" or "1." and "q" or "quit"
                     System.out.println("What is the name of the file?");
                     String fileName = scanner.nextLine();
@@ -28,6 +29,10 @@ public class PlaceSearchArray {
                                 System.out.println("Array loaded successfully.");
                     }
                     break;
+                    } catch (RuntimeException e) {
+                        System.out.println("Could not find file");
+                        break;
+                    }
                 case '2':
                     scanner.nextLine();
                     System.out.println("What is the name of the place you are looking for?");
