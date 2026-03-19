@@ -1,9 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class PlaceSearchBST {
     public static void main(String[] args) {
         PlaceNameBST PNB = new PlaceNameBST();
-        System.out.println("Welcome to the PlaceSearchArray Terminal Dialogue");
+        System.out.println("Welcome to the PlaceSearchBST Terminal Dialogue");
         Scanner scanner = new Scanner(System.in);
         boolean bQuit = false;
         while (!bQuit) {
@@ -24,10 +25,11 @@ public class PlaceSearchBST {
                     System.out.println("You are loading " + N + " lines, from the file \"" + fileName + "\". \nConfirm [Y/N]:");
                     if (scanner.next().toLowerCase().charAt(0) == 'y') {
                         PNB.loadBST(N, fileName);
-                        System.out.println("Array loaded successfully.");
+                        if (!PNB.getFail()){
+                        System.out.println("BST loaded successfully.");}
                     }
-                    break;
-                    } catch(RuntimeException e) {System.out.println("Please insert a number"); break;}
+                    break;}
+                    catch (RuntimeException e){System.out.println("Please insert a number for the line count"); break;}
                 case '2':
                     scanner.nextLine();
                     System.out.println("What is the name of the place you are looking for?");
@@ -50,7 +52,11 @@ public class PlaceSearchBST {
                     String deletion = scanner.nextLine();
                     if (deletion.isEmpty()){break;}
                     System.out.println("You are about to delete the record with place name " + deletion + ". Confirm [Y/N]:");
-                    if (scanner.next().toLowerCase().charAt(0) == 'y') { //allows user to say Y, Yes, y or yes
+                    if (scanner.next().toLowerCase().charAt(0) == 'y') {//allows user to say Y, Yes, y or yes
+                        if (PNB.searchTree(deletion).id().isEmpty()){
+                            System.out.println("The record to delete could not be found");
+                            break;
+                        }
                         PNB.deleteBST(deletion);
                         System.out.println("The record has been deleted.");
                         }
