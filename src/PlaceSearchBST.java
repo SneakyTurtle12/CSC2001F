@@ -1,7 +1,8 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**Class containing main method for interacting with BST*/
 public class PlaceSearchBST {
+    /**main method for UI of BST interaction*/
     public static void main(String[] args) {
         PlaceNameBST PNB = new PlaceNameBST();
         System.out.println("Welcome to the PlaceSearchBST Terminal Dialogue");

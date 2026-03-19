@@ -2,6 +2,7 @@
 //LBNSEB002
 
 public record PlaceNameEntry(
+        //*Record class for use in entire program, implements comparable and toString output gives output in csv format*/
         String id,
         String placeName,
         String municipality,

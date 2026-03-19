@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**Class for all methods relating to BST operation*/
 public class PlaceNameBST {
     private boolean bFail;
     private int comparisons;
@@ -18,7 +19,8 @@ public class PlaceNameBST {
         }
     }
     private Node root;
-    public PlaceNameBST() { //constructor for BST
+    /**Constructor for PlaceNameBST*/
+    public PlaceNameBST() {
         root = null;
     }
     private void insert(PlaceNameEntry value) {
@@ -45,6 +47,11 @@ public class PlaceNameBST {
 
         return root;
     }
+
+    /**Searches tree recursively, best case O(logN) time
+     * @param placeName String of name to search for
+     * @return Entire record of searched for string
+     */
     public PlaceNameEntry searchTree(String placeName){
         comparisons = 0;
         return searchTreeRecursive(root, placeName);
@@ -64,6 +71,9 @@ public class PlaceNameBST {
             return searchTreeRecursive(root.right, placeName); //if value greater than current root, traverse right node until its found
         }
     }
+    /**Deletes an element from the binary search  tree
+     * @param placeName String to search for and delete
+     * */
     public void deleteBST(String placeName){
         root = deleteBSTRecursive(root, placeName);
     }
@@ -103,6 +113,9 @@ public class PlaceNameBST {
 
         return root;
     }
+    /** Returns the height of the current tree from root to furthest leaf
+     * @return int of tree height
+     */
     public int getTreeHeight(){
         return getRecursiveTreeHeight(root);
     }
@@ -116,9 +129,14 @@ public class PlaceNameBST {
 
         return Math.max(lefth,righth) + 1;//recursively increases height, starts at -1 for null root
     }
+    /**Returns the boolean on whether the last deletion failed
+     * @return boolean of whether deletion failed or not*/
     public boolean getFail(){
         return bFail;
     }
+    /**Loads the BST with given number of files from file specified
+     * @param size int of non-duplicate lines to load
+     * @param fileName string of file to load, with file extension*/
     public void loadBST(int size, String fileName){
         bFail = false;
         File cFile = new File(fileName);
@@ -131,7 +149,7 @@ public class PlaceNameBST {
                 String[] values = line.split(",");
                 insert(new PlaceNameEntry(values[0], values[1], values[2], values[3], Integer.valueOf(values[4]))); //insert into BST
                 if (!dupFlag){
-                    iCount+=1;
+                    iCount+=1; //only increments on nonduplicate
                 }
             }
             scanner.close();

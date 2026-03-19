@@ -6,12 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**Class for running experiment automatically*/
 public class PlaceExperiment {
-
+    /**Main method to run experiment*/
     public static void main(String[] args){
 
         float[] arrayResults = new float[10];
@@ -26,7 +26,7 @@ public class PlaceExperiment {
         Path file = Paths.get("data.txt");
 
         createSortedFile("SAPlaceNames.csv");
-        arrayResults = ArrayResults(N, arrSearches, "SAPlaceNames.csv");
+        arrayResults = ArrayResults(N, arrSearches, "SAPlaceNames.csv"); //each of the experiments has corresponding method
         asisBSTResults = BSTResults(N, arrSearches, "SAPlaceNames.csv");
         degenBSTResults = BSTResults(N, arrSearches, "Sorted.csv");
         createIdealFile("SAPlaceNamesOptimal.txt");
@@ -34,8 +34,9 @@ public class PlaceExperiment {
 
         try {
             Files.write(file, new byte[0], StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            Files.writeString(file, String.format("%-8s %-10s %-15s %-15s %-15s%n", "N","Array","BST(as-is)", "BST(sorted)","BST(optimal)"), StandardOpenOption.APPEND);
+            Files.writeString(file, String.format("%-8s %-10s %-15s %-15s %-15s%n", "N","Array","BST(as-is)", "BST(sorted)","BST(optimal)"), StandardOpenOption.APPEND); //formatting for header
             for (int n = 0; n < 10; n++) {
+                //formatting for data
                 Files.writeString(file, String.format("%-8d %-10.1f %-15.1f %-15.1f %-15.1f%n", N[n], arrayResults[n], asisBSTResults[n], degenBSTResults[n], idealBSTResults[n]), StandardOpenOption.APPEND);          }
         }
         catch(IOException e){
@@ -82,7 +83,7 @@ public class PlaceExperiment {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        arrResults.sort(null);
+        arrResults.sort(null); //natural ordering
         try (BufferedWriter writer = Files.newBufferedWriter(filenew,
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
             for (PlaceNameEntry entry : arrResults) {
@@ -102,9 +103,9 @@ public class PlaceExperiment {
 
             for (int n = 0; n < 50; n++){
                 PNA.search(arrSearches[n]);
-                comparisons += PNA.getComparisons();
+                comparisons += PNA.getComparisons(); //gets number of comparisons
             }
-            arrResults[i] = (float) comparisons/50;
+            arrResults[i] = (float) comparisons/50; //getd
 
         }
         return arrResults;
@@ -118,9 +119,9 @@ public class PlaceExperiment {
 
             for (int n = 0; n<arrSearches.length; n++){
                 PNB.searchTree(arrSearches[n]);
-                comparisons += PNB.getComparisons();
+                comparisons += PNB.getComparisons(); //get total comparisons
             }
-            arrResults[i] = (float) comparisons / 50;
+            arrResults[i] = (float) comparisons / 50; //get average
         }
         return  arrResults;
     }
@@ -129,23 +130,22 @@ public class PlaceExperiment {
         BST.loadBST(12499, "SAPlaceNames.csv");
 
         File idealtxt = new File(fileName);
-        Path idealcsv = Paths.get("Ideal.csv");
+        Path idealcsv = Paths.get("Ideal.csv"); //csv of names in ideal ordering
 
-        // The 'try-with-resources' block automatically closes the writer at the end
         try (BufferedWriter writer = Files.newBufferedWriter(idealcsv,
                 StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING)) {
 
-            // Write the CSV Header once
+            // Write the CSV Header
             writer.write("id,placename,municipality,province,population");
-            writer.newLine(); // Reliable way to add a line break across different OS
+            writer.newLine();
 
             Scanner scanner = new Scanner(idealtxt);
             while (scanner.hasNextLine()) {
                 String targetName = scanner.nextLine().trim();
                 if (targetName.isEmpty()) continue;
 
-                PlaceNameEntry record = BST.searchTree(targetName);
+                PlaceNameEntry record = BST.searchTree(targetName);  //get whole record from placename alone
 
                 if (record != null && !record.id().equals("")) {
                     // Construct the line
@@ -156,7 +156,7 @@ public class PlaceExperiment {
                             record.province(),
                             record.population());
 
-                    // Write to the buffer (not the disk yet!)
+                    // Write data to buffer
                     writer.write(csvLine);
                     writer.newLine();
                 }

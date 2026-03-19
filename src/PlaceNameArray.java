@@ -5,10 +5,17 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class PlaceNameArray {
+    //*Class for all the methods used for array experiments*/
     private PlaceNameEntry[] arrPlaces;
     private int comparisons;
     private int iCount = 0;
-    public void loadArray(int size, String fileName){
+
+    /**Loads N lines of the csv given by fileName into an array,
+     * @param size - number of non-duplicate records to load into array
+     * @param fileName - name of file to load from -> include file extension
+     * */
+    public void loadArray(int size, String fileName) {
+
         iCount = 0;
         Set<String> seen = new HashSet<>();
         File cFile = new File(fileName);
@@ -31,6 +38,10 @@ public class PlaceNameArray {
             throw new RuntimeException(e);
         }
     }
+    /** Searches array sequentially, O(N) time complexity
+     * @param name placeName to search for
+     * @return the corresponding record
+     * */
     public PlaceNameEntry search(String name){
         comparisons = 0;
         for (int i = 0; i < iCount; i++){
@@ -41,6 +52,14 @@ public class PlaceNameArray {
         }
         return new PlaceNameEntry("","","","",0);
     }
-    public int getComparisons(){return comparisons;}
-    public PlaceNameEntry[] getArrPlaces(){return arrPlaces;    }
+    /**Returns number of comparisons
+     * @return number of comparisons
+     * */
+    public int getComparisons(){
+        return comparisons;}
+    /**Return array made by loading, currently not in use
+     * @return array of records
+     * */
+    public PlaceNameEntry[] getArrPlaces(){
+        return arrPlaces;    }
 }

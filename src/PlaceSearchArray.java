@@ -2,7 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**Class containing main method for interacting with array*/
 public class PlaceSearchArray {
+    /**Main method with UI for interacting with array*/
     public static void main(String[] args){
         PlaceNameArray PNA = new PlaceNameArray();
         System.out.println("Welcome to the PlaceSearchArray Terminal Dialogue");
@@ -15,7 +17,7 @@ public class PlaceSearchArray {
             System.out.println("3. Return number of comparisons for most recent search");
             switch (scanner.next().toLowerCase().charAt(0)){
                 case '1':
-                    scanner.nextLine(); //gets rid of \n from reading first char, allowing user to say 1 or 1. and q or quit
+                    scanner.nextLine(); //gets rid of \n from reading first char, allowing user to say "1" or "1." and "q" or "quit"
                     System.out.println("What is the name of the file?");
                     String fileName = scanner.nextLine();
                     System.out.println("How many lines of the array would you like to load?");
